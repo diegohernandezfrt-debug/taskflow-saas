@@ -9,7 +9,15 @@ import routes from "./routes/index.js";
 
 const app = express();
 
-app.use(cors());
+app.use(
+  cors({
+    origin: [
+      "*",
+      "*",
+    ],
+    credentials: true,
+  })
+);
 app.use(express.json());
 app.use("/api/projects", projectRoutes);
 app.use("/api/tasks", taskRoutes);
