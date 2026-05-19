@@ -1,0 +1,93 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          String       @id @default(uuid())
+  name        String
+  email       String       @unique
+  password    String
+  role        UserRole     @default(MEMBER)
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  memberships Membership[]
+  tasks       Task[]
+
+  @@map("users")
+}
+
+model Workspace {
+  id          String       @id @default(uuid())
+  name        String
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  memberships Membership[]
+  projects    Project[]
+
+  @@map("workspaces")
+}
+
+model Membership {
+  id          String    @id @default(uuid())
+  userId      String
+  workspaceId String
+  createdAt   DateTime  @default(now())
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, workspaceId])
+  @@map("memberships")
+}
+
+model Project {
+  id          String        @id @default(uuid())
+  name        String
+  description String?
+  status      ProjectStatus @default(ACTIVE)
+  workspaceId String
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  workspace   Workspace     @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  tasks       Task[]
+
+  @@map("projects")
+}
+
+model Task {
+  id          String     @id @default(uuid())
+  title       String
+  description String?
+  status      TaskStatus @default(TODO)
+  priority String @default("MEDIUM")
+  dueDate DateTime?
+  projectId   String
+  assigneeId  String?
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  assignee    User?      @relation(fields: [assigneeId], references: [id])
+  project     Project    @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@map("tasks")
+}
+
+enum UserRole {
+  OWNER
+  ADMIN
+  MEMBER
+}
+
+enum ProjectStatus {
+  ACTIVE
+  ARCHIVED
+}
+
+enum TaskStatus {
+  TODO
+  IN_PROGRESS
+  DONE
+}
