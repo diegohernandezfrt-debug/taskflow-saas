@@ -44,7 +44,8 @@ type UpdateTaskInput = {
 };
 
 export async function updateTask(
-  data: UpdateTaskInput
+  taskId: string,
+  data: any
 ) {
   const {
     id,
