@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const api = axios.create({
   baseURL:
-    "http://localhost:4000/api",
+    "https://taskflow-api-l8k2.onrender.com/api",
 });
 
 api.interceptors.request.use(
