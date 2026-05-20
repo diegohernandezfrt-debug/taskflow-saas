@@ -57,10 +57,10 @@ export async function update(
 ) {
   try {
     const project =
-      await updateProject({
-        id: req.params.id,
-        name: req.body.name,
-      });
+      await updateProject(
+        String(req.params.id),
+        name
+      );
 
     res.json({
       message:
@@ -85,7 +85,7 @@ export async function remove(
 ) {
   try {
     await deleteProject(
-      req.params.id
+      String(req.params.id)
     );
 
     res.json({
