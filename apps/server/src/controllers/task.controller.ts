@@ -36,10 +36,9 @@ export async function list(req: Request, res: Response) {
   try {
     const { projectId } = req.params;
 
-    const tasks =
-      await getProjectTasks(
-        String(projectId)
-      );
+    const tasks =     await getProjectTasks(
+                        String(projectId)
+                      );
 
     res.json({
       tasks,
@@ -54,16 +53,31 @@ export async function list(req: Request, res: Response) {
   }
 }
 
-export async function updateTask(
-  taskId: string,
-  data: any
+export async function update(
+  req: Request,
+  res: Response
 ) {
-  return prisma.task.update({
-    where: {
-      id: taskId,
-    },
-    data,
-  });
+  try {
+    const task =
+      await updateTask(
+        String(req.params.id),
+        req.body
+      );
+
+    res.json({
+      message: "Task updated",
+      task,
+    });
+  } catch (error) {
+    const message =
+      error instanceof Error
+        ? error.message
+        : "Internal server error";
+
+    res.status(400).json({
+      message,
+    });
+  }
 }
 
 export async function remove(req: Request, res: Response) {

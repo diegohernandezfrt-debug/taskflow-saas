@@ -72,3 +72,15 @@ export async function deleteProject(
     },
   });
 }
+
+export async function updateTask(
+  taskId: string,
+  data: any
+) {
+  return prisma.task.update({
+    where: {
+      id: taskId,
+    },
+    data,
+  });
+}
