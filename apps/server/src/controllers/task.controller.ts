@@ -53,10 +53,11 @@ export async function list(req: Request, res: Response) {
 
 export async function update(req: Request, res: Response) {
   try {
-    const task = await updateTask({
-      id: req.params.id,
-      ...req.body,
-    });
+    const task = await updateTask(
+      String(req.params.id),
+      ...req.body
+    )
+      
 
     res.json({
       message: "Task updated",
@@ -74,7 +75,7 @@ export async function update(req: Request, res: Response) {
 
 export async function remove(req: Request, res: Response) {
   try {
-    await deleteTask(req.params.id);
+    await deleteTask(String(req.params.id));
 
     res.json({
       message: "Task deleted",
