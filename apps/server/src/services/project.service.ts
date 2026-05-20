@@ -49,30 +49,26 @@ export async function getProjects(userId: string) {
   });
 }
 
-type UpdateProjectInput = {
-  id: string;
-  name: string;
-};
-
 export async function updateProject(
-  data: UpdateProjectInput
+  projectId: string,
+  name: string
 ) {
   return prisma.project.update({
     where: {
-      id: data.id,
+      id: projectId,
     },
     data: {
-      name: data.name,
+      name,
     },
   });
 }
 
 export async function deleteProject(
-  id: string
+  projectId: string
 ) {
   return prisma.project.delete({
     where: {
-      id,
+      id: projectId,
     },
   });
 }
