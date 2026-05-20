@@ -1,8 +1,9 @@
-import express from "express";
+import express, { Router } from "express";
 import healthRoute from "./health.route.js";
 import authRoute from "./auth.route.js";
 
-const router = express.Router();
+const router: Router =
+  express.Router();
 
 router.use("/health", healthRoute);
 router.use("/api/auth", authRoute);

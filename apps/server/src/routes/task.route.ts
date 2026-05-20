@@ -1,4 +1,4 @@
-import express from "express";
+import express, { Router } from "express";
 import { requireAuth } from "../middlewares/auth.middleware.js";
 import {
   create,
@@ -7,7 +7,8 @@ import {
   update,
 } from "../controllers/task.controller.js";
 
-const router = express.Router();
+const router: Router =
+  express.Router();
 
 router.post("/", requireAuth, create);
 router.get("/project/:projectId", requireAuth, list);

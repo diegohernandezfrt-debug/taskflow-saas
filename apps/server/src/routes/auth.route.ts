@@ -1,4 +1,4 @@
-import express from "express";
+import express, { Router } from "express";
 import {
   register,
   login,
@@ -7,7 +7,8 @@ import {
 
 import { requireAuth } from "../middlewares/auth.middleware.js";
 
-const router = express.Router();
+const router: Router =
+  express.Router();
 
 router.post("/register", register);
 router.post("/login", login);
