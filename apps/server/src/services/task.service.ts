@@ -47,25 +47,11 @@ export async function updateTask(
   taskId: string,
   data: any
 ) {
-  const {
-    id,
-    title,
-    status,
-    dueDate,
-  } = data;
-
   return prisma.task.update({
     where: {
       id: taskId,
     },
-    data: {
-      title,
-      status,
-      dueDate:
-        dueDate !== undefined
-          ? new Date(dueDate)
-          : undefined,
-    },
+    data,
   });
 }
 
