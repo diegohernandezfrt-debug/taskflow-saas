@@ -56,7 +56,7 @@ export async function updateTask(
 
   return prisma.task.update({
     where: {
-      id,
+      id: taskId,
     },
     data: {
       title,
