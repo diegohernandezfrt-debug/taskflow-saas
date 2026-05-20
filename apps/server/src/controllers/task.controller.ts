@@ -55,7 +55,7 @@ export async function update(req: Request, res: Response) {
   try {
     const task = await updateTask(
       String(req.params.id),
-      ...req.body
+      req.body
     )
       
 

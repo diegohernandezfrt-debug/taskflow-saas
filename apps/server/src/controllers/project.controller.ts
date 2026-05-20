@@ -56,7 +56,7 @@ export async function update(
   res: Response
 ) {
   try {
-    const {id, name } = req.body;
+    const { name } = req.body;
     const project =
       await updateProject(
         String(req.params.id),
