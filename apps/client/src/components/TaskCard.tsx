@@ -51,16 +51,13 @@ export default function TaskCard({
     listeners,
     setNodeRef,
     transform,
-    transition,
-  } = useDraggable({
-    id: task.id,
-  });
+    isDragging,
+} = useDraggable({
+  id: task.id,
+});
 
   const style = {
-    transform: CSS.Translate.toString(
-      transform
-    ),
-    transition,
+    transform: CSS.Translate.toString(transform),
   };
 
   return (

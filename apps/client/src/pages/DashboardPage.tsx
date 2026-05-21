@@ -55,9 +55,6 @@ export default function DashboardPage() {
   const [creatingTask, setCreatingTask] =
     useState(false);
 
-  const [taskTitle, setTaskTitle] =
-    useState("");
-
   const [taskModalOpen, setTaskModalOpen] =
     useState(false);
 

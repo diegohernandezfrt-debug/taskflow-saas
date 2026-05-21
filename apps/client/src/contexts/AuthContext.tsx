@@ -42,23 +42,6 @@ export function AuthProvider({
     useState(true);
   
   useEffect(() => {
-    async function loadUser() {
-      try {
-        if (!token) {
-          setLoading(false);
-          return;
-        }
-
-        const userData =
-          await getMe();
-
-        setUser(userData);
-      } catch {
-        logout();
-      } finally {
-        setLoading(false);
-      }
-    }
 
     loadUser();
   }, [token]);
