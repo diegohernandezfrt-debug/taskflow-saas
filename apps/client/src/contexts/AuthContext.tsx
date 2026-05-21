@@ -40,6 +40,21 @@ export function AuthProvider({
 
   const [loading, setLoading] =
     useState(true);
+
+  async function loadUser() {
+    try {
+      if (!token) return;
+
+      const userData =
+        await getMe();
+
+      setUser(userData);
+    } catch {
+      logout();
+    } finally {
+      setLoading(false);
+    }
+  }
   
   useEffect(() => {
 
@@ -99,19 +114,4 @@ export function useAuth() {
   }
 
   return context;
-}
-
-async function loadUser() {
-  try {
-    if (!token) return;
-
-    const userData =
-      await getMe();
-
-    setUser(userData);
-  } catch {
-    logout();
-  } finally {
-    setLoading(false);
-  }
 }

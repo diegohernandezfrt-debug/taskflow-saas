@@ -51,7 +51,6 @@ export default function TaskCard({
     listeners,
     setNodeRef,
     transform,
-    isDragging,
 } = useDraggable({
   id: task.id,
 });
