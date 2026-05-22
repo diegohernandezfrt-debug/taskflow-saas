@@ -14,6 +14,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173",
+      "https://taskflow-saas-q4zt.onrender.com",
     ],
     credentials: true,
   })
